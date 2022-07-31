@@ -96,7 +96,7 @@ const App: Component = () => {
 	
 	return (
 		<Routes>
-			<Route path="/" component={lazy(() => import('./views/Home'))} />
+			<Route path="/" component={lazy(() => import('./views/home'))} />
 			<Route
 				path="/characters"
 				component={lazy(() => import('./views/characters.outlet'))}
