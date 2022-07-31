@@ -39,19 +39,20 @@ const SearchCharacters = () => {
 	return (
 		<Suspense fallback={<div>Cargando página...</div>}>
 			<div class="min-h-screen flex flex-col items-center space-y-4">
+				<h2 class="text-center  font-bold xl:text-4xl text-xl mt-3">Buscar personaje</h2>
 				<aside class="form-control">
 					<label class="label">
 						<span class="label-text">Personaje a buscar</span>
 					</label>
 
-					<span class="flex flex-row items-center space-x-3">
+					<span class="flex xl:flex-row flex-col xl:space-y-0  space-y-3 items-center space-x-3">
 						<input
 							class="input input-bordered input-primary w-full max-w-xs"
 							type="text"
 							placeholder="Por ej... Superman."
 							name="name"
 							value={name()}
-							onBlur={handleChange}
+							onChange={handleChange}
 						/>
 						<button class="btn btn-primary" onClick={() => handleReset()}>
 							Reiniciar busqueda

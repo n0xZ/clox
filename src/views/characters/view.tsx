@@ -15,7 +15,7 @@ type CharacterItemProps = {
 export const CharacterItem = ({ character }: CharacterItemProps) => {
 	const { addHeroToLocalStorage } = useSelectedCharacters()
 	return (
-		<article class="card w-96 bg-base-100 shadow-xl">
+		<article class="card w-96 bg-base-100 shadow-xl hover:opacity-80">
 			<figure class="px-10 pt-10">
 				<img
 					src={character.image.url}
@@ -70,7 +70,7 @@ const ViewCharactersPage = () => {
 
 	return (
 		<>
-			<h2 class="text-4xl text-center mb-6 mt-6">Lista de personajes:</h2>
+			<h2 class="text-4xl font-bold text-center mb-6 mt-6">Lista de personajes:</h2>
 			<Show when={!isRouting()} fallback={<div>Cargando contenido....</div>}>
 				<CharacterList characters={characters} />
 			</Show>

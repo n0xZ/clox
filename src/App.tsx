@@ -8,8 +8,8 @@ interface Props {
 export const CharactersLayout: Component<Props> = ({ children }) => {
 	return (
 		<>
-			<header class="bg-primary top-0 sticky z-10">
-				<nav class="navbar container mx-auto">
+			<header class="border-b-2 border-gray-100 bg-base-100 top-0 sticky z-10">
+				<nav class="navbar container mx-auto font-bold font-inter">
 					<aside class="flex-1">
 						<h1 class="text-xl normal-case btn btn-ghost">
 							<NavLink href="/characters/home">Home</NavLink>
@@ -30,9 +30,9 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 										<path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
 									</svg>
 								</span>
-								<ul class="p-2 bg-base-200">
+								<ul class="p-2 bg-base-100">
 									<li>
-										<NavLink href="/characters/view" activeClass="bg-base-100">
+										<NavLink href="/characters/view" >
 											Ver personajes
 										</NavLink>
 									</li>
@@ -68,9 +68,7 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 								class="p-2 mt-3 space-y-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 "
 							>
 								<li>
-									<NavLink href="/characters/view" activeClass="bg-base-100">
-										Ver personajes
-									</NavLink>
+									<NavLink href="/characters/view">Ver personajes</NavLink>
 								</li>
 								<li>
 									<NavLink href="/characters/search">Buscar personajes</NavLink>
@@ -80,8 +78,8 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 					</aside>
 				</nav>
 			</header>
-			<main class="min-h-screen">{children}</main>
-			<footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+			<main class="min-h-screen font-lato">{children}</main>
+			<footer class="footer footer-center p-10 bg-base-100 border-t-2 border-gray-100 text-base-content rounded">
 				<p class="flex flex-row items-center">
 					<span class="text-xl">Hecho con </span>
 					<a href="https://www.solidjs.com/">
@@ -93,7 +91,6 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 	)
 }
 const App: Component = () => {
-	
 	return (
 		<Routes>
 			<Route path="/" component={lazy(() => import('./views/home'))} />

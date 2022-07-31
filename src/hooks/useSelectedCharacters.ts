@@ -25,20 +25,19 @@ export const useSelectedCharacters = () => {
 			)
 			setMyCharacters(selectedCharacters)
 			toast.success('GIF agregado con éxito')
-		} else {
-			const selectedCharacters = JSON.parse(
-				String(localStorage.getItem('selected-characters'))
-			) as Character[]
-
-			selectedCharacters.push(char)
-
-			localStorage.setItem(
-				'selected-characters',
-				JSON.stringify(selectedCharacters)
-			)
-			setMyCharacters(selectedCharacters)
-			toast.success('GIF agregado con éxito')
 		}
+		const selectedCharacters = JSON.parse(
+			String(localStorage.getItem('selected-characters'))
+		) as Character[]
+
+		selectedCharacters.push(char)
+
+		localStorage.setItem(
+			'selected-characters',
+			JSON.stringify(selectedCharacters)
+		)
+		setMyCharacters(selectedCharacters)
+		toast.success('Personaje agregado al equipo con exito!')
 	}
 	const removeHeroFromLocalStorage = (char: Character) => {
 		const selectedCharacters = JSON.parse(
@@ -51,6 +50,7 @@ export const useSelectedCharacters = () => {
 			'selected-characters',
 			JSON.stringify(filteredCharacters)
 		)
+		toast.success('Personaje eliminado del equipo con exito!')
 		setMyCharacters(filteredCharacters)
 	}
 	return {

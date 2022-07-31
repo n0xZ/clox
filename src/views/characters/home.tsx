@@ -11,7 +11,7 @@ const SelectedCharacter = ({
 	removeHeroFromLocalStorage: (char: Character) => void
 }) => {
 	return (
-		<article class="card w-96 bg-base-100 shadow-xl">
+		<article class="card w-96 bg-base-100 shadow-xl ">
 			<figure class="px-10 pt-10">
 				<img
 					src={character.image.url}
@@ -95,7 +95,10 @@ export default function CharactersHome() {
 
 	return (
 		<>
-			<Show when={myCharacters()?.length!== 0} fallback={<EmptySelectedCharacters />}>
+			<Show
+				when={myCharacters()?.length !== 0}
+				fallback={<EmptySelectedCharacters />}
+			>
 				<>
 					<h2 class="text-4xl text-center mb-12 mt-3">Mis heroes elegidos</h2>
 					<SelectedCharacters
