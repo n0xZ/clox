@@ -1,5 +1,7 @@
 import { Link, useIsRouting, useRouteData } from '@solidjs/router'
 import { createSignal, For, Resource, Show } from 'solid-js'
+import toast from 'solid-toast'
+import { useSelectedCharacters } from '~/hooks/useSelectedCharacters'
 import { ViewCharacters } from '~/loaders/characters.data'
 import { Character } from '~/types'
 
@@ -9,11 +11,9 @@ type CharacterListProps = {
 type CharacterItemProps = {
 	character: Character
 }
-type PaginationState = {
-	characters: Character[] | undefined
-	pages: number
-}
+
 export const CharacterItem = ({ character }: CharacterItemProps) => {
+	const { addHeroToLocalStorage } = useSelectedCharacters()
 	return (
 		<article class="card w-96 bg-base-100 shadow-xl">
 			<figure class="px-10 pt-10">
@@ -30,35 +30,37 @@ export const CharacterItem = ({ character }: CharacterItemProps) => {
 				<p
 					class={`${
 						character.biography.alignment === 'good'
-							? 'text-emerald-500'
-							: 'text-red-500'
+							? 'badge badge-primary'
+							: 'badge badge-error'
 					}`}
 				>
 					{character.biography.alignment.toUpperCase()}
 				</p>
-				<div class="card-actions">
-					<Link href={`/characters/${character.id}`} class="btn btn-primary">
+				<div class="card-actions flex flex-col">
+					<Link
+						href={`/characters/${character.id}`}
+						class="btn btn-primary w-44"
+					>
 						Ver personaje
 					</Link>
+					<button
+						class="btn btn-secondary w-44"
+						onClick={() => addHeroToLocalStorage(character)}
+					>
+						Agregar a mi equipo
+					</button>
 				</div>
 			</aside>
 		</article>
 	)
 }
 export const CharacterList = ({ characters }: CharacterListProps) => {
-	const [pages, setPages] = createSignal(12)
-
 	return (
-		<>
-			<section class="grid xl:grid-cols-3 grid-cols-1 gap-3 place-items-center mb-3">
-				<For each={characters()}>
-					{(character) => <CharacterItem character={character} />}
-				</For>
-			</section>
-			<section class="flex flex-row items-center justify-center w-full">
-				<button class="btn btn-primary w-full">Ver más</button>
-			</section>
-		</>
+		<section class="grid xl:grid-cols-3 grid-cols-1 gap-3 place-items-center mb-3">
+			<For each={characters()}>
+				{(character) => <CharacterItem character={character} />}
+			</For>
+		</section>
 	)
 }
 

@@ -23,6 +23,7 @@
     "daisyui": "^2.20.0",
     "postcss": "^8.4.14",
     "solid-js": "^1.4.7",
+    "solid-toast": "^0.3.4",
     "tailwindcss": "^3.1.7"
   }
 }

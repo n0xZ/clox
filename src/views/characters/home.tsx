@@ -1,15 +1,15 @@
 import { Link } from '@solidjs/router'
 import { Accessor, createSignal, For, Show } from 'solid-js'
+import { useSelectedCharacters } from '~/hooks/useSelectedCharacters'
 import { Character } from '~/types'
 
-const getSelectedHeroes = () => {
-	const selectedHeroes = JSON.parse(
-		String(localStorage.getItem('selected-characters'))
-	) as Character[]
-	return selectedHeroes
-}
-
-const SelectedCharacter = ({ character }: { character: Character }) => {
+const SelectedCharacter = ({
+	character,
+	removeHeroFromLocalStorage,
+}: {
+	character: Character
+	removeHeroFromLocalStorage: (char: Character) => void
+}) => {
 	return (
 		<article class="card w-96 bg-base-100 shadow-xl">
 			<figure class="px-10 pt-10">
@@ -26,12 +26,35 @@ const SelectedCharacter = ({ character }: { character: Character }) => {
 				<p
 					class={`${
 						character.biography.alignment === 'good'
-							? 'text-emerald-500'
-							: 'text-red-500'
+							? 'badge badge-primary'
+							: 'badge badge-error'
 					}`}
 				>
 					{character.biography.alignment.toUpperCase()}
 				</p>
+
+				<For each={Object.values(character.powerstats)}>
+					{(element, id) => (
+						<p>
+							{Object.keys(character.powerstats)[id()].toUpperCase()} :{' '}
+							{element}
+						</p>
+					)}
+				</For>
+				<div class="card-actions flex flex-col">
+					<Link
+						href={`/characters/${character.id}`}
+						class="btn btn-primary w-44"
+					>
+						Ver personaje
+					</Link>
+					<button
+						class="btn btn-error w-44"
+						onClick={() => removeHeroFromLocalStorage(character)}
+					>
+						Eliminar de mi equipo
+					</button>
+				</div>
 			</aside>
 		</article>
 	)
@@ -39,37 +62,47 @@ const SelectedCharacter = ({ character }: { character: Character }) => {
 
 const SelectedCharacters = ({
 	selectedCharacters,
+	removeHeroFromLocalStorage,
 }: {
 	selectedCharacters: Accessor<Character[] | null>
+	removeHeroFromLocalStorage: (char: Character) => void
 }) => {
 	return (
-		<section class="grid place-items-center h-screen">
+		<section class="grid xl:grid-cols-3 grid-cols-1 gap-3 place-items-center mb-3">
 			<For each={selectedCharacters()}>
-				{(character) => <SelectedCharacter character={character} />}
+				{(character) => (
+					<SelectedCharacter
+						character={character}
+						removeHeroFromLocalStorage={removeHeroFromLocalStorage}
+					/>
+				)}
 			</For>
 		</section>
 	)
 }
-
-export default function CharactersHome() {
-	const [myCharacters, setMyCharacters] = createSignal<Character[] | null>(
-		getSelectedHeroes()
+const EmptySelectedCharacters = () => {
+	return (
+		<section>
+			<p class="flex flex-row items-center">
+				Al parecer no tienes heroes escogidos.
+			</p>
+			<Link href="/characters/view"> Puedes elegirlos clickeando aquí</Link>
+		</section>
 	)
+}
+export default function CharactersHome() {
+	const { myCharacters, removeHeroFromLocalStorage } = useSelectedCharacters()
 
 	return (
 		<>
-			<Show
-				when={myCharacters()}
-				fallback={
-					<section>
-						<p class="flex flex-row items-center">
-							Al parecer no tienes heroes escogidos. Puedes elegirlos{' '}
-							<Link href="/characters/view"> clickeando aquí</Link>
-						</p>
-					</section>
-				}
-			>
-				<SelectedCharacters selectedCharacters={myCharacters} />
+			<Show when={myCharacters()?.length!== 0} fallback={<EmptySelectedCharacters />}>
+				<>
+					<h2 class="text-4xl text-center mb-12 mt-3">Mis heroes elegidos</h2>
+					<SelectedCharacters
+						selectedCharacters={myCharacters}
+						removeHeroFromLocalStorage={removeHeroFromLocalStorage}
+					/>
+				</>
 			</Show>
 		</>
 	)
