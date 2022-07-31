@@ -2,11 +2,18 @@
 module.exports = {
 	content: [
 		'./src/**/*.tsx',
+		'./src/**/*.html',
 		'./src/views/**/*.tsx',
 		'./src/components/**/*.tsx',
 	],
 	theme: {
-		extend: {},
+		extend: {
+			fontFamily: {
+				lato: 'Lato',
+				inter: 'Inter',
+				karla: 'Karla',
+			},
+		},
 	},
 	plugins: [require('daisyui')],
 }
