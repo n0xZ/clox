@@ -12,7 +12,7 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 				<nav class="navbar container mx-auto font-bold font-inter">
 					<aside class="flex-1">
 						<h1 class="text-xl normal-case btn btn-ghost">
-							<NavLink href="/characters/home">Home</NavLink>
+							<NavLink href="/characters/home" activeClass='text-primary'>Home</NavLink>
 						</h1>
 					</aside>
 					<aside class="hidden space-x-4 navbar-end xl:flex">
@@ -32,12 +32,12 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 								</span>
 								<ul class="p-2 bg-base-100">
 									<li>
-										<NavLink href="/characters/view" >
+										<NavLink href="/characters/view" activeClass='text-primary' >
 											Ver personajes
 										</NavLink>
 									</li>
 									<li>
-										<NavLink href="/characters/search">
+										<NavLink href="/characters/search" activeClass='text-primary'>
 											Buscar personajes
 										</NavLink>
 									</li>
@@ -68,10 +68,10 @@ export const CharactersLayout: Component<Props> = ({ children }) => {
 								class="p-2 mt-3 space-y-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 "
 							>
 								<li>
-									<NavLink href="/characters/view">Ver personajes</NavLink>
+									<NavLink href="/characters/view" activeClass='text-primary'>Ver personajes</NavLink>
 								</li>
 								<li>
-									<NavLink href="/characters/search">Buscar personajes</NavLink>
+									<NavLink href="/characters/search " activeClass='text-primary'>Buscar personajes</NavLink>
 								</li>
 							</ul>
 						</div>

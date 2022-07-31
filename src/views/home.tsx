@@ -7,21 +7,21 @@ const HomeLanding = () => {
 				<article class="flex-col hero-content lg:flex-row">
 					<img
 						src={HeroLandingImage}
-						class="rounded-lg border-[1px] border-secondary"
+						class="rounded-lg shadow-md"
 						height={500}
 						width={500}
 						alt="Imagen principal de la Landing Clox"
 					/>
 					<aside class="text-center">
-						<h1 class="text-4xl font-bold ">
-							Busca tu personaje favorito del universo de comics!
+						<h1 class="text-4xl font-bold  text-transparent  bg-clip-text bg-gradient-to-r from-green-500 to-blue-500">
+							Busca y arma tu equipo favorito del universo de comics!
 						</h1>
 						<p class="py-6 text-gray-500">
 							En Clox, puedes elegir y añadir distíntos personajes a tu equipo,
-							ya sea del mundo Marvel, DC y más!
+							ya sea del mundo Marvel, DC y más.
 						</p>
 						<Link href="/characters/home" class="btn btn-secondary">
-							Empieza ya
+							Pruebalo ya!
 						</Link>
 					</aside>
 				</article>
